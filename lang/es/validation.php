@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'required' => 'El campo :attribute es obligatorio.',
+    'required_if' => 'El campo :attribute es obligatorio para esta opción.',
+    'string' => 'El campo :attribute debe ser texto.',
+    'integer' => 'El campo :attribute debe ser un número entero.',
+    'numeric' => 'El campo :attribute debe ser numérico.',
+    'boolean' => 'El valor de :attribute no es válido.',
+    'array' => 'El campo :attribute debe ser una lista.',
+    'email' => 'Captura un correo electrónico válido.',
+    'regex' => 'El formato de :attribute no es válido.',
+    'date_format' => 'El formato de :attribute debe ser :format.',
+    'after' => 'El campo :attribute debe ser posterior a :date.',
+    'after_or_equal' => 'El campo :attribute debe ser igual o posterior a :date.',
+    'in' => 'Selecciona una opción válida para :attribute.',
+    'exists' => 'La opción seleccionada en :attribute no está disponible.',
+    'file' => 'El campo :attribute debe ser un archivo.',
+    'mimes' => 'El archivo de :attribute debe ser de tipo: :values.',
+    'dimensions' => 'La evidencia debe ser una imagen válida de hasta 12000 × 12000 píxeles.',
+    'uploaded' => 'No se pudo recibir el archivo de :attribute.',
+    'max' => ['string' => 'El campo :attribute no puede superar :max caracteres.', 'file' => 'El archivo de :attribute no puede superar :max KB.', 'numeric' => 'El campo :attribute no puede superar :max.'],
+    'min' => ['numeric' => 'El campo :attribute debe ser al menos :min.'],
+    'between' => ['numeric' => 'El campo :attribute debe estar entre :min y :max.'],
+    'attributes' => ['codigo_postal' => 'código postal', 'celular_1' => 'celular principal', 'celular_2' => 'celular alternativo', 'apellido_paterno' => 'apellido paterno', 'apellido_materno' => 'apellido materno', 'seccion_electoral' => 'sección electoral', 'numero_personas' => 'número de personas', 'categoria_vulnerable' => 'grupo de atención', 'evento_id' => 'evento', 'no_exterior' => 'número exterior', 'hora_inicio' => 'hora de inicio', 'hora_fin' => 'hora de cierre', 'cupo_maximo' => 'cupo máximo'],
+];

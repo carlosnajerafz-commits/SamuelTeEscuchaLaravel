@@ -1,0 +1,296 @@
+/* ==========================================================
+   Chatbot ciudadano — Samuel Te Escucha
+   Prefijo .stec-chat para no chocar con los estilos del sitio.
+========================================================== */
+
+.stec-chat {
+  --stec-vino:      #7A1737;
+  --stec-vino-osc:  #5C1029;
+  --stec-fondo:     #FFFFFF;
+  --stec-superficie:#F4F2ED;
+  --stec-borde:     #E2DED6;
+  --stec-texto:     #1F2937;
+  --stec-texto-sec: #4B5563;
+
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9000;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+/* ---------- Botón flotante ---------- */
+
+.stec-chat__toggle {
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: var(--stec-vino);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(122, 23, 55, 0.35);
+  transition: background .18s, transform .18s;
+}
+
+.stec-chat__toggle:hover  { background: var(--stec-vino-osc); transform: scale(1.05); }
+.stec-chat__toggle:active { transform: scale(0.97); }
+
+.stec-chat__toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(122, 23, 55, 0.35);
+}
+
+/* Alterna los dos iconos según el estado del panel */
+.stec-chat__icono-cerrar { display: none; }
+.stec-chat--abierto .stec-chat__icono-abrir  { display: none; }
+.stec-chat--abierto .stec-chat__icono-cerrar { display: block; }
+
+/* ---------- Panel ---------- */
+
+.stec-chat__panel {
+  position: absolute;
+  right: 0;
+  bottom: 72px;
+  width: 370px;
+  max-width: calc(100vw - 32px);
+  height: 540px;
+  max-height: calc(100vh - 120px);
+  background: var(--stec-fondo);
+  border: 1px solid var(--stec-borde);
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(17, 24, 39, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.stec-chat__panel[hidden] { display: none; }
+
+/* ---------- Encabezado ---------- */
+
+.stec-chat__encabezado {
+  background: var(--stec-vino);
+  color: #fff;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.stec-chat__titulo    { margin: 0; font-size: 16px; font-weight: 700; }
+.stec-chat__subtitulo { margin: 2px 0 0; font-size: 12px; opacity: .85; }
+
+.stec-chat__cerrar {
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.stec-chat__cerrar:hover { background: rgba(255, 255, 255, 0.32); }
+.stec-chat__cerrar:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---------- Historial ---------- */
+
+.stec-chat__mensajes {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--stec-superficie);
+}
+
+.stec-chat__mensajes::-webkit-scrollbar       { width: 6px; }
+.stec-chat__mensajes::-webkit-scrollbar-thumb { background: #CFC9BE; border-radius: 10px; }
+
+.stec-chat__burbuja {
+  max-width: 84%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.stec-chat__burbuja--bot {
+  align-self: flex-start;
+  background: #fff;
+  color: var(--stec-texto);
+  border: 1px solid var(--stec-borde);
+  border-bottom-left-radius: 4px;
+}
+
+.stec-chat__burbuja--usuario {
+  align-self: flex-end;
+  background: var(--stec-vino);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.stec-chat__burbuja strong { font-weight: 700; }
+
+/* Indicador de que el bot está respondiendo */
+.stec-chat__escribiendo {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 13px 16px;
+  background: #fff;
+  border: 1px solid var(--stec-borde);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+}
+
+.stec-chat__punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9CA3AF;
+  animation: stec-rebote 1.3s infinite;
+}
+
+.stec-chat__punto:nth-child(2) { animation-delay: .18s; }
+.stec-chat__punto:nth-child(3) { animation-delay: .36s; }
+
+@keyframes stec-rebote {
+  0%, 60%, 100% { transform: translateY(0);     opacity: .45; }
+  30%           { transform: translateY(-5px);  opacity: 1;   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stec-chat__punto  { animation: none; opacity: .6; }
+  .stec-chat__toggle { transition: none; }
+}
+
+/* ---------- Sugerencias ---------- */
+
+.stec-chat__sugerencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0 14px;
+  background: var(--stec-superficie);
+  flex-shrink: 0;
+}
+
+.stec-chat__sugerencias:not(:empty) { padding: 10px 14px 12px; }
+
+.stec-chat__sugerencia {
+  background: #fff;
+  border: 1px solid var(--stec-vino);
+  color: var(--stec-vino);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.stec-chat__sugerencia:hover { background: var(--stec-vino); color: #fff; }
+.stec-chat__sugerencia:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(122, 23, 55, 0.3);
+}
+
+/* ---------- Formulario ---------- */
+
+.stec-chat__form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--stec-borde);
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* Etiqueta solo para lectores de pantalla */
+.stec-chat__etiqueta {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stec-chat__input {
+  flex: 1;
+  min-height: 44px;
+  border: 1px solid #D1D5DB;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--stec-texto);
+}
+
+.stec-chat__input:focus {
+  outline: none;
+  border-color: var(--stec-vino);
+  box-shadow: 0 0 0 3px rgba(122, 23, 55, 0.12);
+}
+
+.stec-chat__enviar {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: var(--stec-vino);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+
+.stec-chat__enviar:hover:not(:disabled) { background: var(--stec-vino-osc); }
+.stec-chat__enviar:disabled { opacity: .5; cursor: not-allowed; }
+.stec-chat__enviar:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(122, 23, 55, 0.35);
+}
+
+/* ---------- Aviso al pie ---------- */
+
+.stec-chat__aviso {
+  margin: 0;
+  padding: 0 14px 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--stec-texto-sec);
+  text-align: center;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* ---------- Teléfono ---------- */
+
+@media (max-width: 480px) {
+  .stec-chat { right: 14px; bottom: 14px; }
+
+  .stec-chat__panel {
+    width: calc(100vw - 28px);
+    height: calc(100vh - 110px);
+    bottom: 68px;
+  }
+}
