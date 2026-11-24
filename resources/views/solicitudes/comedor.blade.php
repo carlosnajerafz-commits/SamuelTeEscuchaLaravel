@@ -100,7 +100,7 @@
     }
   </style>
 <link rel="stylesheet" href="{{ asset('assets/css/solicitudes.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css').'?v=2' }}">
 </head>
 <body>
 <header class="topbar">
@@ -276,3 +276,4 @@
 <x-chatbot />
 </body>
 </html>
+
