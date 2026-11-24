@@ -118,6 +118,7 @@
     .pfm-body::-webkit-scrollbar { width: 5px; }
     .pfm-body::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
   </style>
+<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css').'?v=2' }}">
 </head>
 
 
@@ -292,16 +293,7 @@
   </div>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer__inner">
-    <div class="footer-left">
-      <img src="assets/img/SM LOGO-07.png" alt="Logo" class="footer-logo">
-      <span>© 2026 Samuel Te Escucha</span>
-    </div>
-    <div>Oficina virtual</div>
-    <a href="{{ route('login') }}" onclick="alert('Solo el personal tiene acceso a este apartado')">Personal</a>
-  </div>
-</footer>
+<x-public-footer />
 
 <script src="assets/js/app.js"></script>
 

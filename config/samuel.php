@@ -6,6 +6,8 @@ use App\Models\RegistroApoyo;
 use App\Models\RegistroComedor;
 
 return [
+    'developer_name' => 'Gestionity',
+    'developer_url' => null,
     'modules' => [
         'quejas' => ['title' => 'Gestión y quejas', 'model' => Queja::class, 'statuses' => ['pendiente', 'atendida', 'cerrada', 'completada']],
         'citas' => ['title' => 'Martes ciudadano', 'model' => Cita::class, 'statuses' => ['solicitada', 'aceptada', 'rechazada', 'realizada', 'cancelada', 'vencida']],

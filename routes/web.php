@@ -10,6 +10,7 @@ use App\Http\Controllers\SolicitudController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
+Route::view('/aviso-de-privacidad', 'legal.privacy')->name('privacy');
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
