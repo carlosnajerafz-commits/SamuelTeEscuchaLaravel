@@ -38,7 +38,12 @@ class SolicitudTest extends LegacyDatabaseTestCase
         Apoyo::create(['nombre' => 'Apoyo de prueba', 'activo' => true]);
         $this->event();
         foreach (['quejas', 'citas', 'apoyos', 'comedor'] as $module) {
-            $this->get('/solicitudes/'.$module)->assertOk()->assertSee('Registrar solicitud');
+            $button = match ($module) {
+                'quejas' => 'Enviar reporte',
+                'comedor' => 'Registrarme',
+                default => 'Enviar solicitud',
+            };
+            $this->get('/solicitudes/'.$module)->assertOk()->assertSee($button)->assertSee('name="_token"', false);
             $this->get('/admin/solicitudes/'.$module)->assertRedirect('/login');
         }
         $this->actingAs(Empleado::factory()->create());
@@ -48,6 +53,53 @@ class SolicitudTest extends LegacyDatabaseTestCase
         $this->get('/admin/catalogos/apoyos')->assertOk();
         $this->get('/admin/catalogos/comedor/crear')->assertOk();
         $this->get('/admin/bloqueos')->assertOk();
+    }
+
+    public function test_comedor_cards_show_capacity_excluding_cancelled_registrations(): void
+    {
+        $event = $this->event(3);
+        RegistroComedor::create([...$this->meal($event->id), 'estatus' => 'pendiente']);
+        RegistroComedor::create([...$this->meal($event->id), 'estatus' => 'cancelado']);
+        $this->get('/solicitudes/comedor?evento='.$event->id)
+            ->assertOk()->assertSee('1 lugar(es)')->assertViewHas('selectedEvent', $event->id);
+        $event->update(['cupo_maximo' => 2]);
+        $this->get('/solicitudes/comedor?evento='.$event->id)
+            ->assertOk()->assertSee('Cupo lleno')->assertViewHas('selectedEvent', null);
+        $event->update(['activo' => false]);
+        $this->get('/solicitudes/comedor')->assertOk()->assertSee('Sin fechas disponibles por el momento')->assertDontSee('id="comedorForm"', false);
+    }
+
+    public function test_original_form_controls_restore_input_and_keep_tracking_folio(): void
+    {
+        $this->withSession(['_old_input' => ['nombre' => 'Ana <Prueba>', 'tipo' => 'Agua', 'descripcion' => 'Falta agua', 'colonia' => 'Centro']])
+            ->get('/solicitudes/quejas')->assertOk()
+            ->assertSee('value="Ana &lt;Prueba&gt;"', false)
+            ->assertSee('value="Agua" checked', false)
+            ->assertSee('Falta agua')->assertSee('ISamuel12.png')
+            ->assertDontSee('name="seccion_electoral"', false);
+        $this->withSession(['_old_input' => ['fecha' => '2030-01-08', 'hora' => '09:20']])
+            ->get('/solicitudes/citas')->assertOk()->assertSee('id="calendarGrid"', false)
+            ->assertSee('id="fechaInput" required value="2030-01-08"', false)
+            ->assertSee('data-slot="09:20"', false)->assertDontSee('type="date"', false);
+        Apoyo::create(['nombre' => 'Apoyo de prueba', 'descripcion' => 'Descripción de prueba', 'activo' => true]);
+        $this->withSession(['_old_input' => ['apoyo' => 'Apoyo de prueba']])
+            ->get('/solicitudes/apoyos')->assertOk()->assertSee('value="Apoyo de prueba" checked', false)
+            ->assertSee('Descripción de prueba')->assertSee('id="modalApoyos"', false);
+        $this->withSession(['folio' => 'CIT-000001'])->get('/solicitudes/citas')
+            ->assertOk()->assertSee('CIT-000001')->assertSee('id="stec-chat"', false);
+    }
+
+    public function test_request_limit_expires_after_three_minutes(): void
+    {
+        $support = Apoyo::create(['nombre' => 'Apoyo de prueba', 'activo' => true]);
+        $data = [...$this->applicant(), 'apoyo' => $support->nombre];
+        for ($attempt = 0; $attempt < 3; $attempt++) {
+            $this->post('/solicitudes/apoyos', $data)->assertSessionHasNoErrors();
+        }
+        $this->post('/solicitudes/apoyos', $data)->assertSessionHasErrors('solicitud');
+        $this->travel(181)->seconds();
+        $this->post('/solicitudes/apoyos', $data)->assertSessionHasNoErrors();
+        $this->assertDatabaseCount('registros_apoyos', 4);
     }
 
     public function test_appointment_rejects_same_day_non_tuesday_and_invalid_hour(): void

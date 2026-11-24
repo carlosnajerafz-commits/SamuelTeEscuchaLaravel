@@ -26,21 +26,28 @@ class SolicitudController extends Controller
         $definition = config('samuel.modules.'.$module);
         abort_unless($definition, 404);
         $options = match ($module) {
-            'apoyos' => Apoyo::where('activo', true)->orderBy('nombre')->get(),
-            'comedor' => EventoComedor::where('activo', true)->where('fecha', '>=', today()->toDateString())->orderBy('fecha')->get(),
+            'apoyos' => Apoyo::where('activo', true)->orderByDesc('created_at')->get(),
+            'comedor' => EventoComedor::where('activo', true)->where('fecha', '>=', today()->toDateString())->withSum(['registros as personas_ocupadas' => fn ($query) => $query->where('estatus', '!=', 'cancelado')], 'numero_personas')->orderBy('fecha')->orderBy('hora_inicio')->get(),
             default => collect(),
         };
 
-        return view('solicitudes.create', compact('module', 'definition', 'options'));
+        $selectedEvent = null;
+        if ($module === 'comedor') {
+            $requestedEvent = old('evento_id', request('evento'));
+            $selectedEvent = $options->first(fn ($event) => $event->id == $requestedEvent
+                && ((int) $event->cupo_maximo === 0 || (int) $event->personas_ocupadas < (int) $event->cupo_maximo))?->id;
+        }
+
+        return view('solicitudes.create', compact('module', 'definition', 'options', 'selectedEvent'));
     }
 
     public function store(SolicitudRequest $request, string $module, CitaService $citas, ComedorService $comedor): RedirectResponse
     {
         $key = 'solicitud:'.$module.':'.$request->ip();
         if (RateLimiter::tooManyAttempts($key, 3)) {
-            throw ValidationException::withMessages(['solicitud' => 'Ya registraste tres solicitudes en la última hora. Intenta más tarde.']);
+            throw ValidationException::withMessages(['solicitud' => 'Ya registraste tres solicitudes en los últimos 3 minutos. Espera un momento e intenta de nuevo.']);
         }
-        RateLimiter::hit($key, 3600);
+        RateLimiter::hit($key, 180);
         $data = array_map(fn ($value) => $value ?? '', $request->safe()->except('evidencia'));
         $path = null;
         try {

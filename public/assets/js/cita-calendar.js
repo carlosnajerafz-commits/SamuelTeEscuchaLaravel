@@ -1,180 +1,130 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const calendarTitle = document.getElementById("calendarTitle");
-  const calendarGrid = document.getElementById("calendarGrid");
-  const prevMonthBtn = document.getElementById("prevMonthBtn");
-  const nextMonthBtn = document.getElementById("nextMonthBtn");
-  const fechaInput = document.getElementById("fechaInput");
-  const fechaVisible = document.getElementById("fechaVisible");
-  const calendarSelectedInfo = document.getElementById("calendarSelectedInfo");
-  const slotsGrid = document.getElementById("slotsGrid");
-  const horaInput = document.getElementById("horaInput");
-  const form = document.getElementById("citaForm");
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('citaForm');
+    if (!form) return;
+    const title = document.getElementById('calendarTitle');
+    const grid = document.getElementById('calendarGrid');
+    const dateInput = document.getElementById('fechaInput');
+    const dateVisible = document.getElementById('fechaVisible');
+    const info = document.getElementById('calendarSelectedInfo');
+    const hourInput = document.getElementById('horaInput');
+    const slots = [...document.querySelectorAll('#slotsGrid .slot-btn')];
+    const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+    const today = new Date(`${form.dataset.today}T00:00:00`);
+    let month = new Date(today.getFullYear(), today.getMonth(), 1);
+    let selected = null;
+    let serial = 0;
+    let availableHours = [];
+    const oldDate = dateInput.value;
+    const oldHour = hourInput.value;
+    dateInput.value = '';
+    hourInput.value = '';
 
-  const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-  const diasLargos = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-
-  let currentDate = new Date();
-  let selectedDate = null;
-
-  function formatDateYYYYMMDD(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const d = String(date.getDate()).padStart(2, "0");
-    return `${y}-${m}-${d}`;
-  }
-
-  function formatDateReadable(date) {
-    return `${diasLargos[date.getDay()]} ${date.getDate()} de ${meses[date.getMonth()]} de ${date.getFullYear()}`;
-  }
-
-  function isPastOrToday(date) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const compare = new Date(date);
-    compare.setHours(0, 0, 0, 0);
-    return compare <= today;
-  }
-
-  function isTuesday(date) {
-    return date.getDay() === 2;
-  }
-
-  function clearHourSelection() {
-    horaInput.value = "";
-    document.querySelectorAll(".slot-btn").forEach(btn => {
-      btn.classList.remove("active");
-    });
-  }
-
-  async function obtenerHorasOcupadas(fecha) {
-    try {
-      const res = await fetch(`horas_ocupadas.php?fecha=${encodeURIComponent(fecha)}`);
-      return await res.json();
-    } catch (e) {
-      return [];
+    function iso(date) {
+        return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
     }
-  }
-
-  async function actualizarHorasOcupadas(fecha) {
-    const horasOcupadas = await obtenerHorasOcupadas(fecha);
-    const horasNormalizadas = horasOcupadas.map(h => String(h).substring(0, 5));
-
-    document.querySelectorAll(".slot-btn").forEach(btn => {
-      const horaBoton = String(btn.dataset.slot || btn.textContent).substring(0, 5);
-
-      btn.disabled = false;
-      btn.classList.remove("disabled");
-      btn.style.pointerEvents = "auto";
-      btn.textContent = horaBoton;
-
-      if (horasNormalizadas.includes(horaBoton)) {
-        btn.disabled = true;
-        btn.classList.add("disabled");
-        btn.style.pointerEvents = "none";
-        btn.textContent = horaBoton + " Ocupado";
-      }
-    });
-  }
-
-  function renderCalendar() {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    calendarTitle.textContent = `${meses[month]} ${year}`;
-    calendarGrid.innerHTML = "";
-
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-
-    let startDay = firstDay.getDay();
-    startDay = startDay === 0 ? 6 : startDay - 1;
-
-    for (let i = 0; i < startDay; i++) {
-      const empty = document.createElement("div");
-      empty.className = "calendar-day-ui empty";
-      calendarGrid.appendChild(empty);
+    function readable(date) {
+        return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
     }
-
-    for (let day = 1; day <= lastDay.getDate(); day++) {
-      const date = new Date(year, month, day);
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "calendar-day-ui";
-
-      const available = isTuesday(date) && !isPastOrToday(date);
-
-      button.classList.add(available ? "enabled" : "disabled");
-
-      if (
-        selectedDate &&
-        selectedDate.getFullYear() === date.getFullYear() &&
-        selectedDate.getMonth() === date.getMonth() &&
-        selectedDate.getDate() === date.getDate()
-      ) {
-        button.classList.add("selected");
-      }
-
-      button.innerHTML = `
-        <span class="calendar-day-number">${day}</span>
-        <span class="calendar-day-label">${isTuesday(date) ? "Martes" : ""}</span>
-      `;
-
-      button.addEventListener("click", async () => {
-        if (!available) return;
-
-        selectedDate = date;
-        const fecha = formatDateYYYYMMDD(date);
-
-        fechaInput.value = fecha;
-        fechaVisible.value = formatDateReadable(date);
-        calendarSelectedInfo.textContent = `Fecha seleccionada: ${formatDateReadable(date)}`;
-
-        clearHourSelection();
+    function clearSlots() {
+        availableHours = [];
+        hourInput.value = '';
+        slots.forEach(button => {
+            button.disabled = true;
+            button.classList.remove('active');
+            button.setAttribute('aria-pressed', 'false');
+        });
+    }
+    function selectHour(button) {
+        if (button.disabled || !availableHours.includes(button.dataset.slot)) return;
+        hourInput.value = button.dataset.slot;
+        slots.forEach(slot => {
+            slot.classList.toggle('active', slot === button);
+            slot.setAttribute('aria-pressed', String(slot === button));
+        });
+    }
+    async function selectDate(date, restoreHour = '') {
+        const current = ++serial;
+        selected = date;
+        dateInput.value = iso(date);
+        dateVisible.value = readable(date);
+        clearSlots();
         renderCalendar();
-        await actualizarHorasOcupadas(fecha);
-      });
-
-      calendarGrid.appendChild(button);
+        info.textContent = `Fecha seleccionada: ${readable(date)}. Consultando horarios…`;
+        try {
+            const response = await fetch(`${form.dataset.availabilityUrl}?fecha=${iso(date)}`, {headers: {Accept: 'application/json'}});
+            if (!response.ok) throw new Error('availability');
+            const data = await response.json();
+            if (current !== serial) return;
+            if (!Array.isArray(data.disponibles)) throw new Error('availability');
+            availableHours = data.disponibles;
+            slots.forEach(button => {
+                button.disabled = !availableHours.includes(button.dataset.slot);
+                button.classList.toggle('disabled', button.disabled);
+                button.textContent = button.dataset.slot + (button.disabled ? ' Ocupado' : '');
+                button.title = button.disabled ? 'Horario no disponible' : '';
+            });
+            info.textContent = `Fecha seleccionada: ${readable(date)}` + (availableHours.length ? '' : '. No hay horarios disponibles. Selecciona otro martes.');
+            const previous = slots.find(button => button.dataset.slot === restoreHour);
+            if (previous) selectHour(previous);
+        } catch {
+            if (current === serial) info.textContent = 'No fue posible consultar los horarios. Selecciona nuevamente un martes para reintentar.';
+        }
     }
-  }
-
-  prevMonthBtn.addEventListener("click", () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
+    function renderCalendar() {
+        title.textContent = `${months[month.getMonth()]} ${month.getFullYear()}`;
+        grid.replaceChildren();
+        const offset = (month.getDay() + 6) % 7;
+        for (let i=0; i<offset; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'calendar-day-ui empty';
+            grid.append(empty);
+        }
+        const last = new Date(month.getFullYear(), month.getMonth()+1, 0).getDate();
+        for (let day=1; day<=last; day++) {
+            const date = new Date(month.getFullYear(), month.getMonth(), day);
+            const enabled = date.getDay() === 2 && date > today;
+            const chosen = selected && iso(date) === iso(selected);
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = `calendar-day-ui ${enabled ? 'enabled' : 'disabled'}${chosen ? ' selected' : ''}`;
+            button.disabled = !enabled;
+            button.setAttribute('aria-label', readable(date));
+            button.setAttribute('aria-pressed', String(Boolean(chosen)));
+            const number = document.createElement('span');
+            number.className = 'calendar-day-number';
+            number.textContent = day;
+            const label = document.createElement('span');
+            label.className = 'calendar-day-label';
+            label.textContent = date.getDay() === 2 ? 'Martes' : '';
+            button.append(number, label);
+            button.addEventListener('click', () => selectDate(date));
+            grid.append(button);
+        }
+    }
+    document.getElementById('prevMonthBtn').addEventListener('click', () => {
+        month = new Date(month.getFullYear(), month.getMonth()-1, 1);
+        renderCalendar();
+    });
+    document.getElementById('nextMonthBtn').addEventListener('click', () => {
+        month = new Date(month.getFullYear(), month.getMonth()+1, 1);
+        renderCalendar();
+    });
+    slots.forEach(button => button.addEventListener('click', () => selectHour(button)));
+    form.addEventListener('submit', event => {
+        if (!dateInput.value || !availableHours.includes(hourInput.value)) {
+            event.preventDefault();
+            info.textContent = !dateInput.value ? 'Selecciona una fecha en el calendario.' : 'Selecciona un horario disponible.';
+            grid.querySelector('button.enabled')?.focus();
+        }
+    });
+    clearSlots();
     renderCalendar();
-  });
-
-  nextMonthBtn.addEventListener("click", () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-  });
-
-  slotsGrid.addEventListener("click", (e) => {
-    const btn = e.target.closest(".slot-btn");
-    if (!btn || btn.disabled || btn.classList.contains("disabled")) return;
-
-    if (!fechaInput.value) {
-      alert("Primero selecciona una fecha en el calendario.");
-      return;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(oldDate)) {
+        const previous = new Date(`${oldDate}T00:00:00`);
+        if (previous > today && previous.getDay() === 2) {
+            month = new Date(previous.getFullYear(), previous.getMonth(), 1);
+            selectDate(previous, oldHour);
+        }
     }
-
-    document.querySelectorAll(".slot-btn").forEach(slot => slot.classList.remove("active"));
-    btn.classList.add("active");
-    horaInput.value = String(btn.dataset.slot || btn.textContent).substring(0, 5);
-  });
-
-  form.addEventListener("submit", (e) => {
-    if (!fechaInput.value) {
-      e.preventDefault();
-      alert("Selecciona una fecha en el calendario.");
-      return;
-    }
-
-    if (!horaInput.value) {
-      e.preventDefault();
-      alert("Selecciona un horario.");
-      return;
-    }
-  });
-
-  renderCalendar();
 });
