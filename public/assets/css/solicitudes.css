@@ -1,0 +1,22 @@
+/* Feedback is scoped so the original forms retain their own styles. */
+.solicitud-feedback { margin: 0 0 24px; padding: 24px; border-radius: 18px; background: #fff; }
+.solicitud-feedback--error { border: 1px solid #b91c1c; color: #991b1b; }
+.solicitud-feedback--error ul { padding-left: 24px; }
+.solicitud-feedback--success { border: 2px solid #c8a96a; text-align: center; }
+.solicitud-feedback--success h2 { color: #166534; }
+.solicitud-feedback p { margin: 8px 0; }
+.solicitud-folio { font-size: 32px; font-weight: 800; color: #7a1737; user-select: all; }
+.evento-card:focus-visible, .calendar-nav-btn:focus-visible, .slot-btn:focus-visible,
+.calendar-day-ui:focus-visible { outline: 3px solid #7a1737; outline-offset: 3px; }
+/* Before a date is chosen, keep the original appearance without allowing a reservation. */
+.slot-btn:disabled:not(.disabled) { opacity: 1; background: #fff; color: #374151; }
+@media (max-width: 600px) {
+    .q-topbar-inner, .topbar-inner { flex-direction: column; gap: 12px; text-align: center; }
+    .q-nav, .topbar-inner .nav { display: flex; flex-wrap: wrap; justify-content: center; }
+    .q-page-shell, main.wrap.page-shell { max-width: 100%; }
+    .q-actions { flex-wrap: wrap; }
+    .q-actions .q-btn { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .evento-card, .slot-btn, .calendar-day-ui, .q-btn, .btn { transition: none; }
+}
