@@ -22,7 +22,6 @@
     }
   </style>
 <link rel="stylesheet" href="{{ asset('assets/css/solicitudes.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css').'?v=2' }}">
 </head>
 <body>
 <header class="topbar">
@@ -204,10 +203,18 @@
   </section>
 </main>
 
-<x-public-footer />
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer-left">
+      <img src="{{ asset('assets/img/SM LOGO-07.png') }}" alt="Logo" class="footer-logo">
+      <span>© 2026 Samuel Te Escucha</span>
+    </div>
+    <div>Oficina virtual</div>
+    <a href="{{ route('login') }}" onclick="alert('Solo el personal tiene acceso a este apartado')">Personal</a>
+  </div>
+</footer>
 <script src="{{ asset('assets/js/solicitudes.js') }}" defer></script>
  <script src="{{ asset('assets/js/cita-calendar.js') }}" defer></script>
 <x-chatbot />
 </body>
 </html>
-
