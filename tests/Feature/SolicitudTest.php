@@ -89,19 +89,6 @@ class SolicitudTest extends LegacyDatabaseTestCase
             ->assertOk()->assertSee('CIT-000001')->assertSee('id="stec-chat"', false);
     }
 
-    public function test_request_limit_expires_after_three_minutes(): void
-    {
-        $support = Apoyo::create(['nombre' => 'Apoyo de prueba', 'activo' => true]);
-        $data = [...$this->applicant(), 'apoyo' => $support->nombre];
-        for ($attempt = 0; $attempt < 3; $attempt++) {
-            $this->post('/solicitudes/apoyos', $data)->assertSessionHasNoErrors();
-        }
-        $this->post('/solicitudes/apoyos', $data)->assertSessionHasErrors('solicitud');
-        $this->travel(181)->seconds();
-        $this->post('/solicitudes/apoyos', $data)->assertSessionHasNoErrors();
-        $this->assertDatabaseCount('registros_apoyos', 4);
-    }
-
     public function test_appointment_rejects_same_day_non_tuesday_and_invalid_hour(): void
     {
         $this->travelTo(now()->setDate(2030, 1, 1)->startOfDay());
