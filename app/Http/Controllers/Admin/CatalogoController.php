@@ -23,7 +23,7 @@ class CatalogoController extends Controller
 
     public function index(string $catalog): View
     {
-        $records = $this->model($catalog)::orderByDesc('id')->paginate(25);
+        $records = $this->model($catalog)::query()->when($catalog === 'comedor', fn ($query) => $query->withSum(['registros as inscritos' => fn ($query) => $query->where('estatus', '!=', 'cancelado')], 'numero_personas'))->orderByDesc('id')->paginate(25);
 
         return view('admin.catalogos.index', compact('catalog', 'records'));
     }
@@ -51,5 +51,23 @@ class CatalogoController extends Controller
         });
 
         return to_route('admin.catalogos.index', $catalog)->with('success', 'Catálogo actualizado.');
+    }
+
+    /**
+     * Los registros de apoyo guardan el nombre del apoyo, así que borrarlo no pierde
+     * historial; un evento con inscripciones solo puede desactivarse.
+     */
+    public function destroy(string $catalog, int $id): RedirectResponse
+    {
+        $model = $this->model($catalog);
+        DB::transaction(function () use ($model, $catalog, $id) {
+            $record = $model::whereKey($id)->lockForUpdate()->firstOrFail();
+            if ($catalog === 'comedor' && RegistroComedor::where('evento_id', $id)->exists()) {
+                throw ValidationException::withMessages(['evento' => 'El evento tiene personas inscritas; desactívalo en lugar de eliminarlo.']);
+            }
+            $record->delete();
+        });
+
+        return to_route('admin.catalogos.index', $catalog)->with('success', 'Registro eliminado del catálogo.');
     }
 }

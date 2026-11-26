@@ -31,8 +31,8 @@
             </ul>
         </div>
         <section aria-label="Conócenos">
-            <h2>Conócenos</h2><p>Samuel Te Escucha es la oficina virtual de atención ciudadana del Diputado Samuel Hernández Cruz.</p><p>Un espacio para enviar solicitudes, gestionar citas y consultar apoyos y jornadas del Comedor Solidario.</p><h2 class="site-footer__social-title">Privacidad</h2>
-            <ul><li><a href="{{ route('privacy') }}">Aviso de privacidad</a></li></ul>
+            <h2>Conócenos</h2><p>Samuel Te Escucha es la oficina virtual de atención ciudadana del Diputado Samuel Hernández Cruz.</p><p>Un espacio para enviar solicitudes, gestionar citas y consultar apoyos y jornadas del Comedor Solidario.</p><h2 class="site-footer__social-title">Información legal</h2>
+            <ul><li><a href="{{ route('privacy') }}">Aviso de privacidad</a></li><li><a href="{{ route('terms') }}">Términos y condiciones</a></li><li><a href="{{ route('privacy') }}#cookies">Uso de cookies</a></li></ul>
         </section>
     </div>
     <div class="site-footer__bottom">
@@ -50,5 +50,6 @@
         </div>
     </div>
 </footer>
+<x-cookie-notice />
 
 

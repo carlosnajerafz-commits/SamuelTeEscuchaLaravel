@@ -118,7 +118,7 @@
     .pfm-body::-webkit-scrollbar { width: 5px; }
     .pfm-body::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
   </style>
-<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css').'?v=2' }}">
+<link rel="stylesheet" href="{{ asset('assets/css/public-footer.css').'?v=3' }}">
 </head>
 
 

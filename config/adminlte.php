@@ -767,7 +767,22 @@ return [
     |
     */
 
-    'menu' => [['text' => 'Inicio', 'route' => 'dashboard', 'icon' => 'bi bi-house'], ['text' => 'Gestión y quejas', 'url' => '/admin/solicitudes/quejas'], ['text' => 'Citas', 'url' => '/admin/solicitudes/citas'], ['text' => 'Apoyos', 'url' => '/admin/solicitudes/apoyos'], ['text' => 'Comedor', 'url' => '/admin/solicitudes/comedor'], ['text' => 'Códigos postales', 'route' => 'codigos-postales.index', 'icon' => 'bi bi-geo-alt']],
+    'menu' => [
+        ['text' => 'Inicio', 'route' => 'dashboard', 'icon' => 'bi bi-house'],
+        ['header' => 'SOLICITUDES'],
+        ['text' => 'Gestión y quejas', 'route' => ['admin.solicitudes.index', ['module' => 'quejas']], 'icon' => 'bi bi-megaphone', 'active' => ['admin/solicitudes/quejas*']],
+        ['text' => 'Martes ciudadano', 'route' => ['admin.solicitudes.index', ['module' => 'citas']], 'icon' => 'bi bi-calendar-check', 'active' => ['admin/solicitudes/citas*']],
+        ['text' => 'Apoyos', 'route' => ['admin.solicitudes.index', ['module' => 'apoyos']], 'icon' => 'bi bi-box2-heart', 'active' => ['admin/solicitudes/apoyos*']],
+        ['text' => 'Comedor solidario', 'route' => ['admin.solicitudes.index', ['module' => 'comedor']], 'icon' => 'bi bi-cup-hot', 'active' => ['admin/solicitudes/comedor*']],
+        ['header' => 'CATÁLOGOS'],
+        ['text' => 'Apoyos disponibles', 'route' => ['admin.catalogos.index', ['catalog' => 'apoyos']], 'icon' => 'bi bi-list-check', 'active' => ['admin/catalogos/apoyos*']],
+        ['text' => 'Eventos de comedor', 'route' => ['admin.catalogos.index', ['catalog' => 'comedor']], 'icon' => 'bi bi-calendar-event', 'active' => ['admin/catalogos/comedor*']],
+        ['text' => 'Bloqueos de citas', 'route' => 'admin.bloqueos.index', 'icon' => 'bi bi-calendar-x'],
+        ['text' => 'Códigos postales', 'route' => 'codigos-postales.index', 'icon' => 'bi bi-geo-alt'],
+        ['header' => 'ADMINISTRACIÓN'],
+        ['text' => 'Empleados', 'route' => 'admin.empleados.index', 'icon' => 'bi bi-people', 'active' => ['admin/empleados*']],
+        ['text' => 'Ver sitio público', 'route' => 'home', 'icon' => 'bi bi-box-arrow-up-right', 'target' => '_blank'],
+    ],
 
     /*
     |--------------------------------------------------------------------------

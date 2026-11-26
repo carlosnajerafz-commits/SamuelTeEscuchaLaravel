@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BloqueoCitaController;
 use App\Http\Controllers\Admin\CatalogoController;
+use App\Http\Controllers\Admin\EmpleadoController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CodigoPostalController;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::view('/aviso-de-privacidad', 'legal.privacy')->name('privacy');
+Route::view('/terminos-y-condiciones', 'legal.terms')->name('terms');
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
@@ -38,6 +40,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/catalogos/{catalog}/{id}/editar', [CatalogoController::class, 'form'])->whereNumber('id')->name('catalogos.edit');
     Route::post('/catalogos/{catalog}', [CatalogoController::class, 'save'])->name('catalogos.store');
     Route::put('/catalogos/{catalog}/{id}', [CatalogoController::class, 'save'])->whereNumber('id')->name('catalogos.update');
+    Route::delete('/catalogos/{catalog}/{id}', [CatalogoController::class, 'destroy'])->whereNumber('id')->name('catalogos.destroy');
+    Route::resource('/empleados', EmpleadoController::class)->except('show')->whereNumber('empleado');
     Route::get('/bloqueos', [BloqueoCitaController::class, 'index'])->name('bloqueos.index');
     Route::post('/bloqueos', [BloqueoCitaController::class, 'store'])->name('bloqueos.store');
     Route::delete('/bloqueos/{id}', [BloqueoCitaController::class, 'destroy'])->whereNumber('id')->name('bloqueos.destroy');

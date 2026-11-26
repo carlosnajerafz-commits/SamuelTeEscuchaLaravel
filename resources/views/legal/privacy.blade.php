@@ -39,8 +39,20 @@
       <h3>VII. Revocación del consentimiento</h3>
       <p>Puede revocar en cualquier momento el consentimiento otorgado mediante solicitud al número indicado. Ciertas obligaciones legales pueden impedir la eliminación inmediata de determinada información.</p>
 
-      <h3>VIII. Cambios al aviso de privacidad</h3>
-      <p>Cualquier modificación estará disponible en <strong>samuelteescucha.com</strong>. Para dudas: <strong>55 2172 4723</strong>. Última actualización: junio de 2026.</p>
+      <h3 id="cookies">VIII. Uso de cookies y tecnologías similares</h3>
+      <p>Las cookies son pequeños archivos que el sitio guarda en su navegador. SamuelTeEscucha.com utiliza únicamente cookies técnicas, indispensables para que la Plataforma funcione de forma segura. No se utilizan cookies de publicidad, analítica ni rastreo, y ninguna se comparte con terceros.</p>
+      <table>
+        <thead><tr><th scope="col">Cookie</th><th scope="col">Finalidad</th><th scope="col">Duración</th></tr></thead>
+        <tbody>
+          <tr><td>samuel-te-escucha-session</td><td>Mantener su sesión mientras navega: conserva la conversación con el asistente virtual, los datos del formulario cuando hay que corregir un error y el acceso del personal autorizado.</td><td>{{ config('session.lifetime') }} minutos de inactividad</td></tr>
+          <tr><td>XSRF-TOKEN</td><td>Seguridad: verifica que los formularios se envíen desde este sitio y no desde uno ajeno.</td><td>{{ config('session.lifetime') }} minutos de inactividad</td></tr>
+        </tbody>
+      </table>
+      <p>Además, su navegador guarda en su propio almacenamiento local si ya leyó el aviso de privacidad y el aviso de cookies, para no volver a mostrárselos. Esta información no se envía al servidor.</p>
+      <p>Puede bloquear o eliminar las cookies desde la configuración de su navegador; sin embargo, al ser indispensables, sin ellas no será posible enviar formularios ni usar el asistente virtual.</p>
+
+      <h3>IX. Cambios al aviso de privacidad</h3>
+      <p>Cualquier modificación estará disponible en <strong>samuelteescucha.com</strong>. Para dudas: <strong>55 2172 4723</strong>. Última actualización: noviembre de 2026.</p>
 
 </article>
 @endsection

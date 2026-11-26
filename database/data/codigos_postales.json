@@ -1,0 +1,557 @@
+[
+  {
+    "codigo_postal": "55800",
+    "colonia": "Teotihuacán Centro",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55803",
+    "colonia": "Acatitla",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55803",
+    "colonia": "Colatitla",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55803",
+    "colonia": "El Tejocote",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55807",
+    "colonia": "El Mirador",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55810",
+    "colonia": "San Juan Teotihuacán",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55816",
+    "colonia": "El Portal",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55825",
+    "colonia": "Ampliación Ejidal Tlajinga",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55826",
+    "colonia": "Ampliación San Francisco",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55830",
+    "colonia": "De los Deportes",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55830",
+    "colonia": "Del Valle",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55833",
+    "colonia": "El Potrero",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55838",
+    "colonia": "Atlatongo",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55838",
+    "colonia": "Ejido Purificación",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55840",
+    "colonia": "Ampliación Ejidal Maquixco",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55843",
+    "colonia": "Ampliación Cadena Maquixco",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55843",
+    "colonia": "El Cayahual",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55844",
+    "colonia": "Hacienda Cadena",
+    "municipio": "Teotihuacán"
+  },
+  {
+    "codigo_postal": "55850",
+    "colonia": "San Martín de las Pirámides Centro",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55850",
+    "colonia": "Ejido San Martín",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55852",
+    "colonia": "Ixtlahuaca",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55852",
+    "colonia": "Santa María Tezompa",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55852",
+    "colonia": "Álvaro Obregón",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55852",
+    "colonia": "El Saltito",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55853",
+    "colonia": "Cozotlán Norte",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55853",
+    "colonia": "San Antonio de las Palmas",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55853",
+    "colonia": "Tlachinolpa",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55854",
+    "colonia": "La Noria",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55854",
+    "colonia": "San José Cerro Gordo",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55854",
+    "colonia": "San Marcos Cerro Gordo",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55855",
+    "colonia": "Chimalpa",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55855",
+    "colonia": "Club Campestre Teotihuacán",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55855",
+    "colonia": "Predio Palma y Raya",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55855",
+    "colonia": "San Pablo Ixquitlán",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55856",
+    "colonia": "Santa María Palapa",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55859",
+    "colonia": "Santiago Tepetitlán",
+    "municipio": "San Martín de las Pirámides"
+  },
+  {
+    "codigo_postal": "55940",
+    "colonia": "Axapusco",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55940",
+    "colonia": "Cuauhtémoc",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55940",
+    "colonia": "San Antonio",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55940",
+    "colonia": "San Bartolo Alto",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55940",
+    "colonia": "San Martín",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55950",
+    "colonia": "Guadalupe Relinas",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55950",
+    "colonia": "San Felipe Zacatepec",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55950",
+    "colonia": "San Antonio Coayuca",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55954",
+    "colonia": "San Pablo Xuchitl",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55955",
+    "colonia": "San Nicolás Tetepantla",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55960",
+    "colonia": "San Antonio Ometusco",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55963",
+    "colonia": "San Miguel Ometusco",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55963",
+    "colonia": "Santa Ana",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55965",
+    "colonia": "Jaltepec",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55966",
+    "colonia": "Atla (Tecuautitlán Atla)",
+    "municipio": "Axapusco"
+  },
+  {
+    "codigo_postal": "55970",
+    "colonia": "Barrios Hidalgo",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55970",
+    "colonia": "Morelos",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55970",
+    "colonia": "Vicente Guerrero",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55973",
+    "colonia": "Exhacienda La Puerta",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55975",
+    "colonia": "San Felipe Teotitlán",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55975",
+    "colonia": "Huilotongo",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55975",
+    "colonia": "Tlaxixilo",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55975",
+    "colonia": "Colonia Roma",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55976",
+    "colonia": "San Miguel Atepoxco",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55976",
+    "colonia": "Tepetzingo",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55978",
+    "colonia": "Santa Inés Amiltepec",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55978",
+    "colonia": "Las Ambrises",
+    "municipio": "Nopaltepec"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "San Bartolomé Actopan",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "San Juan Teacalco",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "San Miguel",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "San Antonio",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "De la Cruz",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55980",
+    "colonia": "De Dolores",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55983",
+    "colonia": "El Abrojal",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55983",
+    "colonia": "El Chopo",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55984",
+    "colonia": "Colonia Belén",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55984",
+    "colonia": "Ocotitlán",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55985",
+    "colonia": "Atempan",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55988",
+    "colonia": "Las Pintas",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55989",
+    "colonia": "Presa del Rey",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55990",
+    "colonia": "Ixtlahuaca de Cuauhtémoc",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55993",
+    "colonia": "Ex Hacienda de Paula",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55993",
+    "colonia": "La Estrella",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55994",
+    "colonia": "Axalpa",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55995",
+    "colonia": "Mihuacán",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55996",
+    "colonia": "Álvaro Obregón",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55996",
+    "colonia": "La Presa",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55998",
+    "colonia": "El Tejocote",
+    "municipio": "Temascalapa"
+  },
+  {
+    "codigo_postal": "55730",
+    "colonia": "Ozumbilla",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55733",
+    "colonia": "Santa Cruz Tecámac",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55740",
+    "colonia": "Tecámac Centro",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55740",
+    "colonia": "El Calvario",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55740",
+    "colonia": "Galaxias el Llano",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55743",
+    "colonia": "Hacienda del Bosque",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55743",
+    "colonia": "Real Granada",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55743",
+    "colonia": "La Palma",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55743",
+    "colonia": "Isidro Fabela",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55745",
+    "colonia": "Santa María Ajoloapan",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55746",
+    "colonia": "San Pedro Pozohuacán",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55747",
+    "colonia": "San Jerónimo Xonacahuacan",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55748",
+    "colonia": "Ejido de Tecámac",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55748",
+    "colonia": "1ro de Marzo",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55749",
+    "colonia": "5 de Mayo",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55749",
+    "colonia": "Ampliación 5 de Mayo",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55750",
+    "colonia": "San Juan Pueblo Nuevo",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55755",
+    "colonia": "Los Reyes Acozac",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55760",
+    "colonia": "San Martín Azcatepec",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55760",
+    "colonia": "San Pablo Tecalco",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55763",
+    "colonia": "Los Héroes Tecámac",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55764",
+    "colonia": "Los Héroes Tecámac Jardines",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55765",
+    "colonia": "Los Héroes Tecámac Bosques",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55767",
+    "colonia": "Los Héroes Tecámac Flores",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55768",
+    "colonia": "Los Héroes Tecámac Bosques II",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55769",
+    "colonia": "Los Héroes Tecámac Bosques III",
+    "municipio": "Tecámac"
+  },
+  {
+    "codigo_postal": "55770",
+    "colonia": "Hacienda Ojo de Agua",
+    "municipio": "Tecámac"
+  }
+]

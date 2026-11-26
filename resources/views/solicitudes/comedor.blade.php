@@ -10,6 +10,9 @@
     body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: #1f2937; display:flex; flex-direction:column; min-height:100vh; }
     a { text-decoration: none; color: inherit; }
 
+    .comedor-stage { min-height:100vh; min-height:100svh; display:flex; flex-direction:column; }
+    .comedor-stage > .topbar { flex-shrink:0; }
+    .comedor-stage > main.wrap { width:100%; padding-left:20px; padding-right:20px; }
     /* TOPBAR */
     .topbar { background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; padding:12px 0; }
     .topbar-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; }
@@ -102,6 +105,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/solicitudes.css') }}">
 </head>
 <body>
+<div class="comedor-stage">
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">
@@ -269,6 +273,7 @@
 
   @endif
 </main>
+</div>
 
 <footer class="footer">
   <div class="footer-inner">
