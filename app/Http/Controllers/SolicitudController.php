@@ -45,9 +45,9 @@ class SolicitudController extends Controller
     {
         $key = 'solicitud:'.$module.':'.$request->ip();
         if (RateLimiter::tooManyAttempts($key, 3)) {
-            throw ValidationException::withMessages(['solicitud' => 'Ya registraste tres solicitudes en los últimos 3 minutos. Espera un momento e intenta de nuevo.']);
+            throw ValidationException::withMessages(['solicitud' => 'Ya registraste tres solicitudes en la última hora. Intenta más tarde.']);
         }
-        RateLimiter::hit($key, 180);
+        RateLimiter::hit($key, 3600);
         $data = array_map(fn ($value) => $value ?? '', $request->safe()->except('evidencia'));
         $path = null;
         try {
